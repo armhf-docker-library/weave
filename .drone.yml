@@ -10,7 +10,7 @@ build:
     - apk add --update bash make sudo git perl
     - mkdir weave
     - cd weave
-    - git clone branch v$VERSION https://github.com/weaveworks/weave.git .
+    - git clone --branch v$VERSION https://github.com/weaveworks/weave.git .
     - sed -i 's/^DOCKERHUB_USER=weaveworks$/DOCKERHUB_USER=armhfbuild/' Makefile
     - sed -i 's/^WEAVEEXEC_DOCKER_VERSION=.*$/WEAVEEXEC_DOCKER_VERSION=1.9.1/' Makefile
     - sed -i 's/^DOCKER_DISTRIB_URL=https://get.docker.com/builds/Linux/x86_64/docker-$(WEAVEEXEC_DOCKER_VERSION).tgz$/DOCKER_DISTRIB_URL=https://github.com/armhf-docker-library/binaries/raw/master/docker-$(WEAVEEXEC_DOCKER_VERSION).tgz/' Makefile
