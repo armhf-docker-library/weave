@@ -1,0 +1,55 @@
+matrix:
+  VERSION:
+    - "1.4.3"
+
+build:
+  image: armhfbuild/docker:1.9.1-dind
+  privileged: true
+  commands:
+    - docker daemon --storage-driver overlay --graph /drone/docker &
+    - apk add --update bash make sudo git perl
+    - git clone https://github.com/weaveworks/weave/tree/v$VERSION .
+    - sed -i 's/^DOCKERHUB_USER=weaveworks$/DOCKERHUB_USER=armhfbuild/' Makefile
+    - sed -i 's/^WEAVEEXEC_DOCKER_VERSION=.*$/WEAVEEXEC_DOCKER_VERSION=1.9.1/' Makefile
+    - sed -i 's/^DOCKER_DISTRIB_URL=https://get.docker.com/builds/Linux/x86_64/docker-$(WEAVEEXEC_DOCKER_VERSION).tgz$/DOCKER_DISTRIB_URL=https://github.com/armhf-docker-library/binaries/raw/master/docker-$(WEAVEEXEC_DOCKER_VERSION).tgz/' Makefile
+    - sed -i 's/^\tcurl -o $(DOCKER_DISTRIB) $(DOCKER_DISTRIB_URL)$/\tcurl -o $(DOCKER_DISTRIB) -fsSL $(DOCKER_DISTRIB_URL)/' Makefile
+    - sed -i 's/^FROM golang:.*$/FROM armhfbuild\/golang:1.5.3/' build/Dockerfile
+    - sed -i 's/^RUN go install -race -tags netgo std$/RUN go install -tags netgo std/' build/Dockerfile
+    - sed -i 's/^FROM alpine$/FROM armhfbuild\/alpine/' prog/weaveexec/Dockerfile
+    - make exes
+    # - make prog/weaver/weaver
+    # - make .weaver.uptodate
+
+publish:
+  docker:
+    file: "prog/weaver/Dockerfile"
+    context: "prog/weaver"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/weave
+    tag: "$$VERSION"
+    force_tag: true
+    storage_driver: overlay
+
+  docker:
+    file: "prog/weaveexec/Dockerfile"
+    context: "prog/weaveexec"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/weaveexec
+    tag: "$$VERSION"
+    force_tag: true
+    storage_driver: overlay
+
+  docker:
+    file: "prog/plugin/Dockerfile"
+    context: "prog/plugin"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/weave-plugin
+    tag: "$$VERSION"
+    force_tag: true
+    storage_driver: overlay
