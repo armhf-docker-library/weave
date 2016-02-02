@@ -12,8 +12,8 @@ build:
 
 publish:
   docker:
-    file: "$$VERSION/prog/weaver/Dockerfile"
-    context: "$$VERSION/prog/weaver"
+    file: "$$VERSION/weave/prog/weaver/Dockerfile"
+    context: "$$VERSION/weave/prog/weaver"
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
@@ -23,8 +23,8 @@ publish:
     storage_driver: overlay
 
   docker:
-    file: "$$VERSION/prog/weaveexec/Dockerfile"
-    context: "$$VERSION/prog/weaveexec"
+    file: "$$VERSION/weave/prog/weaveexec/Dockerfile"
+    context: "$$VERSION/weave/prog/weaveexec"
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
@@ -34,8 +34,8 @@ publish:
     storage_driver: overlay
 
   docker:
-    file: "$$VERSION/prog/plugin/Dockerfile"
-    context: "$$VERSION/prog/plugin"
+    file: "$$VERSION/weave/prog/plugin/Dockerfile"
+    context: "$$VERSION/weave/prog/plugin"
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
