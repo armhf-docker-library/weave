@@ -49,7 +49,7 @@ publish:
     username: $$DOCKER_USER
     email: $$DOCKER_EMAIL
     password: $$DOCKER_PASSWORD
-    repo: armhfbuild/weave-plugin
+    repo: armhfbuild/weaveplugin
     tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
