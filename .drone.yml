@@ -8,6 +8,8 @@ build:
   commands:
     - docker daemon --storage-driver overlay --graph /drone/docker &
     - apk add --update bash make sudo git perl
+    - mkdir weave
+    - cd weave
     - git clone https://github.com/weaveworks/weave/tree/v$VERSION .
     - sed -i 's/^DOCKERHUB_USER=weaveworks$/DOCKERHUB_USER=armhfbuild/' Makefile
     - sed -i 's/^WEAVEEXEC_DOCKER_VERSION=.*$/WEAVEEXEC_DOCKER_VERSION=1.9.1/' Makefile
