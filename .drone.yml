@@ -7,7 +7,7 @@ build:
   privileged: true
   commands:
     - docker daemon --storage-driver overlay --graph /drone/docker &
-    - apk add --update bash make sudo git perl
+    - apk add --update bash make sudo git perl sed
     - mkdir weave
     - cd weave
     - git clone --branch v$VERSION https://github.com/weaveworks/weave.git .
