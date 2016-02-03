@@ -14,7 +14,7 @@ build:
     - cd $$VERSION
     - ./build.sh
   when:
-    VERSION: "master"
+    VERSION: master
 
 build:
   image: armhfbuild/golang:1.5.3
