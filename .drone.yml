@@ -8,23 +8,24 @@ matrix:
     - "1.4.3"
 
 build:
-  image: armhfbuild/docker:1.9.1-dind
-  privileged: true
-  commands:
-    - cd $$VERSION
-    - ./build.sh
-  when:
-    matrix:
-      VERSION: master
+  version_master:
+    image: armhfbuild/docker:1.9.1-dind
+    privileged: true
+    commands:
+      - cd $$VERSION
+      - ./build.sh
+    when:
+      matrix:
+        VERSION: master
 
-#build:
-#  image: armhfbuild/golang:1.5.3
-#  commands:
-#    - cd $$VERSION
-#    - VERSION=$$VERSION ./build.sh
-#  when:
-#    matrix:
-#      VERSION: "1.4.3"
+  version_1.4.3:
+    image: armhfbuild/golang:1.5.3
+    commands:
+      - cd $$VERSION
+      - VERSION=$$VERSION ./build.sh
+    when:
+      matrix:
+        VERSION: "1.4.3"
 
 publish:
   docker:
