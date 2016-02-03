@@ -1,9 +1,8 @@
 #!/bin/sh
 
-docker daemon --storage-driver overlay --graph /drone/docker &
 apk add --update bash make sudo git perl sed
 
-VERSION=1.4.3
+# VERSION=1.4.3
 
 mkdir weave
 cd weave

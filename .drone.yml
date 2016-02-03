@@ -1,5 +1,5 @@
 matrix:
-  COMPONENTS:
+  COMPONENT:
     - weave
     - weaveexec
     - weaveplugin
@@ -13,6 +13,16 @@ build:
   commands:
     - cd $$VERSION
     - ./build.sh
+  when:
+    VERSION: "master"
+
+build:
+  image: armhfbuild/golang:1.5.3
+  commands:
+    - cd $$VERSION
+    - VERSION=$$VERSION ./build.sh
+  when:
+    VERSION: "1.4.3"
 
 publish:
   docker:
