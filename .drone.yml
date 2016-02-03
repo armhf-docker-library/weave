@@ -14,7 +14,8 @@ build:
     - cd $$VERSION
     - ./build.sh
   when:
-    VERSION: master
+    matrix:
+      VERSION: "master"
 
 build:
   image: armhfbuild/golang:1.5.3
@@ -22,7 +23,8 @@ build:
     - cd $$VERSION
     - VERSION=$$VERSION ./build.sh
   when:
-    VERSION: "1.4.3"
+    matrix:
+      VERSION: "1.4.3"
 
 publish:
   docker:
@@ -36,7 +38,8 @@ publish:
     force_tag: true
     storage_driver: overlay
     when:
-      COMPONENT: weave
+      matrix:
+        COMPONENT: weave
 
   docker:
     file: "$$VERSION/weave/prog/weaveexec/Dockerfile"
@@ -49,7 +52,8 @@ publish:
     force_tag: true
     storage_driver: overlay
     when:
-      COMPONENT: weaveexec
+      matrix:
+        COMPONENT: weaveexec
 
   docker:
     file: "$$VERSION/weave/prog/plugin/Dockerfile"
@@ -62,4 +66,5 @@ publish:
     force_tag: true
     storage_driver: overlay
     when:
-      COMPONENT: weaveplugin
+      matrix:
+        COMPONENT: weaveplugin
