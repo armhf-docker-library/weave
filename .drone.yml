@@ -1,4 +1,8 @@
 matrix:
+  COMPONENTS:
+    - weave
+    - weaveexec
+    - weaveplugin
   VERSION:
     - "master"
     - "1.4.3"
@@ -21,6 +25,9 @@ publish:
     tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
+    when:
+      COMPONENT: weave
+
   docker:
     file: "$$VERSION/weave/prog/weaveexec/Dockerfile"
     context: "$$VERSION/weave/prog/weaveexec"
@@ -31,6 +38,9 @@ publish:
     tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
+    when:
+      COMPONENT: weaveexec
+
   docker:
     file: "$$VERSION/weave/prog/plugin/Dockerfile"
     context: "$$VERSION/weave/prog/plugin"
@@ -41,3 +51,5 @@ publish:
     tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
+    when:
+      COMPONENT: weaveplugin
