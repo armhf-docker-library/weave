@@ -17,14 +17,14 @@ build:
     matrix:
       VERSION: master
 
-build:
-  image: armhfbuild/golang:1.5.3
-  commands:
-    - cd $$VERSION
-    - VERSION=$$VERSION ./build.sh
-  when:
-    matrix:
-      VERSION: "1.4.3"
+#build:
+#  image: armhfbuild/golang:1.5.3
+#  commands:
+#    - cd $$VERSION
+#    - VERSION=$$VERSION ./build.sh
+#  when:
+#    matrix:
+#      VERSION: "1.4.3"
 
 publish:
   docker:
