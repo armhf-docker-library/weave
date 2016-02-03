@@ -4,7 +4,7 @@ matrix:
     - weaveexec
     - weaveplugin
   VERSION:
-    - "master"
+    - master
     - "1.4.3"
 
 build:
@@ -15,7 +15,7 @@ build:
     - ./build.sh
   when:
     matrix:
-      VERSION: "master"
+      VERSION: master
 
 build:
   image: armhfbuild/golang:1.5.3
