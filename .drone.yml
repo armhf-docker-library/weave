@@ -1,11 +1,11 @@
 matrix:
+  VERSION:
+    - master
+    # - "1.4.3"
   COMPONENT:
     - weave
     - weaveexec
     - weaveplugin
-  VERSION:
-    - master
-    # - "1.4.3"
 
 build:
   version_master:
