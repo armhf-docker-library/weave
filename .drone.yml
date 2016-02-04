@@ -19,13 +19,16 @@ build:
     - echo $$VERSION
     - echo $VERSION
     - echo $DOCKER_USER
+    - echo "$DOCKER_USER"
     - export $DOCKER_USER
+    - echo $DOCKER_EMAIL
+    - echo "$DOCKER_EMAIL"
     - ./publish.sh
   environment:
     - VERSION=$$VERSION
     - DOCKER_USER=$$DOCKER_USER
     - DOCKER_PASSWORD="$$DOCKER_PASSWORD"
-    - DOCKER_EMAIL=$$DOCKER_EMAIL
+    - DOCKER_EMAIL="$$DOCKER_EMAIL"
   when:
     matrix:
       VERSION: master
