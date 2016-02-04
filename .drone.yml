@@ -5,6 +5,8 @@ matrix:
   #   - weaveplugin
   VERSION:
     - master
+    # - 1.4.2
+    # - 1.4.3,1.4,latest
     # - "1.4.3"
 
 build:
@@ -13,8 +15,13 @@ build:
     privileged: true
     commands:
       - cd $$VERSION
-      - VERSION=$$VERSION ./build.sh
-      - DOCKER_USER=$$DOCKER_USER DOCKER_PASSWORD=$$DOCKER_PASSWORD DOCKER_EMAIL=$$DOCKER_EMAIL ./publish.sh
+      - ./build.sh
+      - ./publish.sh
+    environment:
+      - VERSION=$$VERSION
+      - DOCKER_USER=$$DOCKER_USER
+      - DOCKER_PASSWORD="$$DOCKER_PASSWORD"
+      - DOCKER_EMAIL=$$DOCKER_EMAIL
     when:
       matrix:
         VERSION: master
