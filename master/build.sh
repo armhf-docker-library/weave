@@ -17,6 +17,7 @@ sed -i 's|^RUN go install -race -tags netgo std$|RUN go install -tags netgo std|
 sed -i 's|^FROM alpine$|FROM armhfbuild/alpine|' prog/weaveexec/Dockerfile
 
 make exes
+make .weaveexec.uptodate
 
-# - make prog/weaver/weaver
 # - make .weaver.uptodate
+# - make prog/weaver/weaver
