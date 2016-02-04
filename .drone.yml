@@ -1,8 +1,8 @@
 matrix:
-  # COMPONENT:
-  #   - weave
-  #   - weaveexec
-  #   - weaveplugin
+  COMPONENT:
+    - weave
+    - weaveexec
+    - weaveplugin
   VERSION:
     - master
     # - 1.4.2
@@ -15,72 +15,66 @@ build:
   privileged: true
   commands:
     - cd $$VERSION
-    # - ./build.sh
-    - echo $$VERSION
-    - echo $VERSION
-    - echo $DOCKER_USER
-    - echo $$DOCKER_USER
-    - echo "$$DOCKER_USER"
-    - echo "$DOCKER_USER"
-    # - export $DOCKER_USER
-    - echo $DOCKER_EMAIL
-    - echo "$DOCKER_EMAIL"
-    - ./publish.sh
+    - ./build.sh
   when:
     matrix:
       VERSION: master
 
-  # version_1.4.3:
-  #   image: armhfbuild/golang:1.5.3
-  #   commands:
-  #     - cd $$VERSION
-  #     - VERSION=$$VERSION ./build.sh
-  #   when:
-  #     matrix:
-  #       VERSION: "1.4.3"
+#   version_1.4.3:
+#     image: armhfbuild/golang:1.5.3
+#     commands:
+#       - cd $$VERSION
+#       - VERSION=$$VERSION ./build.sh
+#     when:
+#       matrix:
+#         VERSION: "1.4.3"
+#
 
-# publish:
-#   docker:
-#     file: "$$VERSION/weave/prog/weaveexec/Dockerfile"
-#     context: "$$VERSION/weave/prog/weaveexec"
-#     username: $$DOCKER_USER
-#     email: $$DOCKER_EMAIL
-#     password: $$DOCKER_PASSWORD
-#     repo: armhfbuild/weaveexec
-#     tag: "$$VERSION"
-#     force_tag: true
-#     storage_driver: overlay
-#     when:
-#       matrix:
-#         COMPONENT: weaveexec
-#         VERSION: master
-#
-#   docker:
-#     file: "$$VERSION/weave/prog/plugin/Dockerfile"
-#     context: "$$VERSION/weave/prog/plugin"
-#     username: $$DOCKER_USER
-#     email: $$DOCKER_EMAIL
-#     password: $$DOCKER_PASSWORD
-#     repo: armhfbuild/weaveplugin
-#     tag: "$$VERSION"
-#     force_tag: true
-#     storage_driver: overlay
-#     when:
-#       matrix:
-#         VERSION: master
-#         COMPONENT: weaveplugin
-#
-#   docker:
-#     file: "$$VERSION/weave/prog/weaver/Dockerfile"
-#     context: "$$VERSION/weave/prog/weaver"
-#     username: $$DOCKER_USER
-#     email: $$DOCKER_EMAIL
-#     password: $$DOCKER_PASSWORD
-#     repo: armhfbuild/weave
-#     tag: "$$VERSION"
-#     force_tag: true
-#     storage_driver: overlay
-#     when:
-#       matrix:
-#         COMPONENT: weave
-#         VERSION: test
+publish:
+  hub_weave:
+    image: armhfplugins/drone-docker
+    file: "$$VERSION/weave/prog/weaver/Dockerfile"
+    context: "$$VERSION/weave/prog/weaver"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/weave
+    tag: "$$VERSION"
+    force_tag: true
+    storage_driver: overlay
+    when:
+      matrix:
+        COMPONENT: weave
+        VERSION: test
+
+  hub_weaveexec:
+    image: armhfplugins/drone-docker
+    file: "$$VERSION/weave/prog/weaveexec/Dockerfile"
+    context: "$$VERSION/weave/prog/weaveexec"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/weaveexec
+    tag: "$$VERSION"
+    force_tag: true
+    storage_driver: overlay
+    when:
+      matrix:
+        COMPONENT: weaveexec
+        VERSION: master
+
+  hub_plugin:
+    image: armhfplugins/drone-docker
+    file: "$$VERSION/weave/prog/plugin/Dockerfile"
+    context: "$$VERSION/weave/prog/plugin"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/weaveplugin
+    tag: "$$VERSION"
+    force_tag: true
+    storage_driver: overlay
+    when:
+      matrix:
+        VERSION: master
+        COMPONENT: weaveplugin
