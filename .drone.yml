@@ -18,6 +18,8 @@ build:
     # - ./build.sh
     - echo $$VERSION
     - echo $VERSION
+    - echo $DOCKER_USER
+    - export $DOCKER_USER
     - ./publish.sh
   environment:
     - VERSION=$$VERSION
