@@ -15,7 +15,9 @@ build:
   privileged: true
   commands:
     - cd $$VERSION
-    - ./build.sh
+    # - ./build.sh
+    - echo $$VERSION
+    - echo $VERSION
     - ./publish.sh
   environment:
     - VERSION=$$VERSION
