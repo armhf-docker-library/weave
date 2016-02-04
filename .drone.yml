@@ -1,8 +1,8 @@
 matrix:
-  COMPONENT:
-    - weave
-    - weaveexec
-    - weaveplugin
+  # COMPONENT:
+  #   - weave
+  #   - weaveexec
+  #   - weaveplugin
   VERSION:
     - master
     # - 1.4.2
@@ -42,10 +42,6 @@ publish:
     tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
-    when:
-      matrix:
-        COMPONENT: weave
-        VERSION: test
 
   hub_weaveexec:
     image: armhfplugins/drone-docker
@@ -58,10 +54,6 @@ publish:
     tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
-    when:
-      matrix:
-        COMPONENT: weaveexec
-        VERSION: master
 
   hub_plugin:
     image: armhfplugins/drone-docker
@@ -74,7 +66,3 @@ publish:
     tag: "$$VERSION"
     force_tag: true
     storage_driver: overlay
-    when:
-      matrix:
-        VERSION: master
-        COMPONENT: weaveplugin
