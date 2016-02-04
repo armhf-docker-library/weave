@@ -41,6 +41,7 @@ publish:
     when:
       matrix:
         COMPONENT: weaveexec
+        VERSION: master        
 
   docker:
     file: "$$VERSION/weave/prog/plugin/Dockerfile"
@@ -54,6 +55,7 @@ publish:
     storage_driver: overlay
     when:
       matrix:
+        VERSION: master      
         COMPONENT: weaveplugin
 
   docker:
