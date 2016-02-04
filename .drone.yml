@@ -26,11 +26,6 @@ build:
     - echo $DOCKER_EMAIL
     - echo "$DOCKER_EMAIL"
     - ./publish.sh
-  environment:
-    - VERSION=$$VERSION
-    - DOCKER_USER=$$DOCKER_USER
-    - DOCKER_PASSWORD="$$DOCKER_PASSWORD"
-    - DOCKER_EMAIL="$$DOCKER_EMAIL"
   when:
     matrix:
       VERSION: master
