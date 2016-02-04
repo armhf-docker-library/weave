@@ -71,3 +71,4 @@ publish:
     when:
       matrix:
         COMPONENT: weave
+        VERSION: test
