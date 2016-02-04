@@ -19,6 +19,7 @@ build:
     - echo $$VERSION
     - echo $VERSION
     - echo $DOCKER_USER
+    - echo $$DOCKER_USER    
     - echo "$DOCKER_USER"
     # - export $DOCKER_USER
     - echo $DOCKER_EMAIL
