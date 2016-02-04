@@ -5,7 +5,7 @@ matrix:
     - weaveplugin
   VERSION:
     - master
-    - "1.4.3"
+    # - "1.4.3"
 
 build:
   version_master:
@@ -28,20 +28,6 @@ build:
         VERSION: "1.4.3"
 
 publish:
-  docker:
-    file: "$$VERSION/weave/prog/weaver/Dockerfile"
-    context: "$$VERSION/weave/prog/weaver"
-    username: $$DOCKER_USER
-    email: $$DOCKER_EMAIL
-    password: $$DOCKER_PASSWORD
-    repo: armhfbuild/weave
-    tag: "$$VERSION"
-    force_tag: true
-    storage_driver: overlay
-    when:
-      matrix:
-        COMPONENT: weave
-
   docker:
     file: "$$VERSION/weave/prog/weaveexec/Dockerfile"
     context: "$$VERSION/weave/prog/weaveexec"
@@ -69,3 +55,17 @@ publish:
     when:
       matrix:
         COMPONENT: weaveplugin
+
+  docker:
+    file: "$$VERSION/weave/prog/weaver/Dockerfile"
+    context: "$$VERSION/weave/prog/weaver"
+    username: $$DOCKER_USER
+    email: $$DOCKER_EMAIL
+    password: $$DOCKER_PASSWORD
+    repo: armhfbuild/weave
+    tag: "$$VERSION"
+    force_tag: true
+    storage_driver: overlay
+    when:
+      matrix:
+        COMPONENT: weave
