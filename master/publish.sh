@@ -1,9 +1,9 @@
 #!/bin/sh
 
 docker login \
-  --unsername $$DOCKER_USER \
-  --password $$DOCKER_PASSWORD \
-  --email $$DOCKER_EMAIL
+  --username $DOCKER_USER \
+  --password $DOCKER_PASSWORD \
+  --email $DOCKER_EMAIL
 
 COMPONENT=weave
 docker build \
